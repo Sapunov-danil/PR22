@@ -9,10 +9,14 @@
 @{
     foreach (var item in Model)
     {
-        <div>
-            <h3>Модель: @item.Name</h3>
-            <p>Цена: @item.Price</p>
-            <p>Категория: @item.Category.Name</p>
-        </div>    
+        <div class="item">
+            <img src="@item.Img" />
+            <div class="data">
+                <h3>Модель: @item.Name</h3>
+                <div>Цена: @item.Price</div>
+                <div>Категория: @item.Category.Name</div>
+                <div>Описание: @item.Description</div>
+            </div>
+        </div>
     }
 }
