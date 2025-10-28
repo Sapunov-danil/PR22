@@ -32,5 +32,25 @@ namespace Shop_Sapunov.Data.DataBase
                 return items;
             }
         }
+
+        public int Add(Items Item)
+        {
+            MySqlConnection MySqlConnection = Connection.MySqlOpen();
+            Connection.MySqlQuery($"INSERT INTO `Items` (`Name`, `Description`, `Img`, `Price`, `IdCategory`) VALUES ('{Item.Name}', '{Item.Description}', '{Item.Img}', {Item.Price}, {Item.Category.Id});", MySqlConnection);
+            MySqlConnection.Close();
+
+            int IdItem = -1;
+
+            MySqlConnection = Connection.MySqlOpen();
+            MySqlDataReader mySqlDataReaderItem = Connection.MySqlQuery($"SELECT `Id` FROM `Items` WHERE `Name` = '{Item.Name}' AND `Description` = '{Item.Description}' AND `Price` = {Item.Price} AND `IdCategory` = {Item.Category.Id};", MySqlConnection);
+
+            if (mySqlDataReaderItem.HasRows)
+            {
+                mySqlDataReaderItem.Read();
+                IdItem = mySqlDataReaderItem.GetInt32(0);
+            }
+            MySqlConnection.Close();
+            return IdItem;
+        }
     }
 }
