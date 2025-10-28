@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop_Sapunov.Data.Interfaces;
+using Shop_Sapunov.Data.Models;
 using Shop_Sapunov.Data.ViewModell;
 
 namespace Shop_Sapunov.Controllers
@@ -23,6 +24,14 @@ namespace Shop_Sapunov.Controllers
             VMItems.Categorys = IAllCategorys.AllCategorys;
             VMItems.SelectCategory = id;
             return View(VMItems);
+        }
+
+        [HttpGet]
+        public ViewResult Add() 
+        {
+            IEnumerable<Categorys> Categorys = IAllCategorys.AllCategorys;
+
+            return View(Categorys);
         }
     }
 }
