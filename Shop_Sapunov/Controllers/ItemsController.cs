@@ -124,5 +124,17 @@ namespace Shop_Sapunov.Controllers
             // Возвращаем списком всю корзину
             return Json(UserBasket.BasketItem);
         }
+
+        public ActionResult BasketCount(int idItem = -1, int count = -1)
+        {
+            if (idItem != -1)
+            {
+                if (count == 0)
+                    UserBasket.BasketItem.Remove(UserBasket.BasketItem.Find(x => x.Id == idItem));
+                else
+                    UserBasket.BasketItem.Find(x => x.Id == idItem).Count = count;
+            }
+            return Json(UserBasket.BasketItem);
+        }
     }
 }
