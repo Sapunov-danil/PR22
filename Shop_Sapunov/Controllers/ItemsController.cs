@@ -113,5 +113,16 @@ namespace Shop_Sapunov.Controllers
             // Перенаправляем обратно к списку предметов после удаления
             return RedirectToAction("List");
         }
+
+        public ActionResult Basket(int idItem = -1)
+        {
+            if (idItem != -1)
+            {
+                // добавляем в корзину предмет
+                UserBasket.BasketItem.Add(new ItemsBasket(1, IAllItems.AllItems.Where(x => x.Id == idItem).First()));
+            }
+            // Возвращаем списком всю корзину
+            return Json(UserBasket.BasketItem);
+        }
     }
 }
