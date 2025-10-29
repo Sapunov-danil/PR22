@@ -66,3 +66,23 @@
         }
     }
 }
+<script>
+    $(".item").children(".basket").children(".button").click(function(){
+        $(this).parent().children(".count").show();
+        $(this).hide();
+        $.ajax({
+            url: '@Url.Action("Basket", "Items")',
+            contentType: "application/json; charset=utf-8",
+            data: { idItem: $(this).attr('id')},
+            dataType: "json",
+            success: SuccessBasket,
+            error: AjaxError
+        });
+    });
+    function SuccessBasket(data){
+        console.log(data);
+    }
+    function AjaxError(){
+        console.log("Ошибка выполнения ajax");
+    }
+</script>
