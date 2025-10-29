@@ -1,0 +1,66 @@
+﻿@using Shop_Sapunov.Data.Models
+@using Shop_Sapunov.Data.ViewModell
+
+@model Items
+
+@{
+    Layout = "_Layout";
+    // Получаем список категорий из ViewBag для отображения в выпадающем списке
+    var categories = (IEnumerable<Categorys>)ViewBag.Categorys;
+}
+
+<h2 style="text-align:center; margin-top: 20px;">Редактирование предмета</h2>
+
+<!-- Форма отправляет данные на экшен Update контроллера Items -->
+<!-- Используем метод POST и enctype для поддержки загрузки файлов -->
+<form asp-action="Update" asp-controller="Items" method="post" enctype="multipart/form-data">
+    <!-- Скрытое поле для передачи id редактируемого предмета -->
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    <div>
+        <label>Название:</label>
+        <!-- Текстовое поле для названия с предзаполненным значением из модели -->
+        <input type="text" name="name" value="@Model.Name" required />
+    </div>
+
+    <div>
+        <label>Описание:</label>
+        <!-- Текстовое поле для описания предмета -->
+        <textarea name="description" required>@Model.Description</textarea>
+    </div>
+
+    <div>
+        <label>Изображение:</label><br />
+        <!-- Отображение текущего изображения предмета -->
+        <img src="@Model.Img" width="200" style="display:block; margin-bottom: 10px;" /><br />
+        <label>Заменить изображение:</label>
+        <!-- Поле для выбора нового файла изображения -->
+        <input type="file" name="file" accept="image/*" />
+    </div>
+
+    <div>
+        <label>Цена:</label>
+        <!-- Числовое поле для цены с ограничением ввода положительных чисел -->
+        <input type="number" name="price" value="@Model.Price" min="0" required />
+    </div>
+
+    <div>
+        <label>Категория:</label>
+        <!-- Выпадающий список категорий -->
+        <select name="idCategory" required>
+            <!-- Перебор всех категорий для создания опций -->
+            @foreach (var cat in categories)
+            {
+                <!-- Отмечаем текущую категорию как выбранную -->
+                <option value="@cat.Id" @(Model.Category?.Id == cat.Id ? "selected" : "")>@cat.Name</option>
+            }
+        </select>
+    </div>
+
+    <div style="text-align: center;">
+        <!-- Кнопка отправки формы для сохранения изменений -->
+        <button type="submit" style="padding: 8px 16px; margin-right: 10px;">Сохранить</button>
+        <!-- Ссылка для отмены и перехода к списку предметов -->
+        <a href="/Items/List" style="padding: 8px 16px; background:#ccc; border-radius:4px; text-decoration:none; color:black;">Отмена</a>
+    </div>
+</form>

@@ -31,8 +31,10 @@
 
 <h2>Все предметы</h2>
 @{
+    // перебираем предметы
     foreach (var item in Model.Items)
     {
+        // если айди категории равно выбранной категории
         if (item.Category.Id == Model.SelectCategory)
         {
             <div class="item">
@@ -42,6 +44,13 @@
                     <div>Цена: @item.Price</div>
                     <div>Категория: @item.Category.Name</div>
                     <div>Описание: @item.Description</div>
+                    <!-- ссылка на страницу изменения-->
+                    <a href="/Items/Update?id=@item.Id">Изменить</a>
+                    <!-- кнопка удаления-->
+                    <form class="delete" method="post" action="/Items/Delete">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <input type="submit" value="Удалить" />
+                    </form>
                 </div>
             </div>
         }

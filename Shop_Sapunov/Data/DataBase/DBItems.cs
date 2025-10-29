@@ -52,5 +52,27 @@ namespace Shop_Sapunov.Data.DataBase
             MySqlConnection.Close();
             return IdItem;
         }
+        // метод обновления предметов
+        public void Update(Items Item) // в метод передаётся предмет
+        {
+            // открываем подключение
+            MySqlConnection MySqlConnection = Connection.MySqlOpen();
+
+            // обновляем данные в таблице Items того предмета, чей айди совпадает с айди переданного в метод предмета
+            Connection.MySqlQuery($"UPDATE `Items` SET `Name` = '{Item.Name}', `Description` = '{Item.Description}', `Img` = '{Item.Img}', `Price` = {Item.Price}, `IdCategory` = {Item.Category.Id} WHERE `Id` = {Item.Id};", MySqlConnection);
+            //закрываем подключение
+            MySqlConnection.Close();
+        }
+
+        // метод удаления предметов
+        public void Delete(int id) // в метод передаётся айди
+        {
+            //открывем подключение
+            MySqlConnection MySqlConnection = Connection.MySqlOpen();
+            // удаляем из таблицы Items тот предмет чей айди совпадает с переданным в метод айди
+            Connection.MySqlQuery($"DELETE FROM `Items` WHERE `Id` = {id}", MySqlConnection);
+            // закрываем подключение
+            MySqlConnection.Close();
+        }
     }
 }

@@ -69,3 +69,37 @@ form {
     form select {
         width: -webkit-fill-available;
     }
+
+    form button {
+        background-color: #007eff;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+        form button:hover {
+            background-color: #005ecb;
+        }
+
+    form a {
+        display: inline-block;
+        vertical-align: middle;
+        user-select: none;
+    }
+
+.delete {
+    width: 200px;
+    float: right;
+    box-shadow: none;
+}
+
+.button {
+    height: 20px;
+    width: 110px;
+    cursor: pointer;
+    text-align: center;
+    background: #ffc300;
+}

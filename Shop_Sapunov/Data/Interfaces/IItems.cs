@@ -6,5 +6,7 @@ namespace Shop_Sapunov.Data.Interfaces
     {
         public IEnumerable<Items> AllItems { get; }
         public int Add(Items Item);
+        public void Update(Items item);
+        public void Delete(int id);
     }
 }

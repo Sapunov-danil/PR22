@@ -33,5 +33,20 @@ namespace Shop_Sapunov.Data.Mocks
                 };
             }
         }
+
+        public int Add(Items Item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Items item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
